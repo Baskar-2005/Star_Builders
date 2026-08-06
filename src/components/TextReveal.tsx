@@ -1,10 +1,10 @@
-import React, { ElementType } from 'react';
-import { motion } from 'motion/react';
+import React from 'react';
+import { motion, Variants } from 'motion/react';
 
 interface TextRevealProps {
   text: string;
   className?: string;
-  as?: ElementType;
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'div' | 'span';
   delay?: number;
   shining?: boolean;
   shiningVariant?: 'gold' | 'dark' | 'white';
@@ -26,7 +26,7 @@ export default function TextReveal({
 }: TextRevealProps) {
   const words = text.split(' ');
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: (i: number = 1) => ({
       opacity: 1,
@@ -37,7 +37,7 @@ export default function TextReveal({
     }),
   };
 
-  const wordVariants = {
+  const wordVariants: Variants = {
     hidden: {
       opacity: 0,
       y: 20,
@@ -57,8 +57,6 @@ export default function TextReveal({
     },
   };
 
-  const Component = motion[as as keyof typeof motion] || motion.div;
-
   const getShiningClass = () => {
     if (!shining) return '';
     if (shiningVariant === 'gold') return 'gold-shining-text';
@@ -66,32 +64,36 @@ export default function TextReveal({
     return 'shining-text';
   };
 
+  const innerContent = words.map((word, idx) => {
+    const cleanWord = word.replace(/[^a-zA-Z0-9]/g, '');
+    const isHighlighted = highlightWords.some(
+      (hw) => hw.toLowerCase() === cleanWord.toLowerCase()
+    );
+
+    return (
+      <motion.span
+        key={idx}
+        variants={wordVariants}
+        className={`inline-block origin-bottom transition-all ${
+          isHighlighted ? highlightClass : ''
+        }`}
+      >
+        {word}
+      </motion.span>
+    );
+  });
+
+  const fullClassName = `inline-flex flex-wrap gap-x-[0.3em] gap-y-[0.1em] ${className} ${getShiningClass()}`;
+
   return (
-    <Component
+    <motion.div
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-50px' }}
-      className={`inline-flex flex-wrap gap-x-[0.3em] gap-y-[0.1em] ${className} ${getShiningClass()}`}
+      className={fullClassName}
     >
-      {words.map((word, idx) => {
-        const cleanWord = word.replace(/[^a-zA-Z0-9]/g, '');
-        const isHighlighted = highlightWords.some(
-          (hw) => hw.toLowerCase() === cleanWord.toLowerCase()
-        );
-
-        return (
-          <motion.span
-            key={idx}
-            variants={wordVariants}
-            className={`inline-block origin-bottom transition-all ${
-              isHighlighted ? highlightClass : ''
-            }`}
-          >
-            {word}
-          </motion.span>
-        );
-      })}
-    </Component>
+      {innerContent}
+    </motion.div>
   );
 }
