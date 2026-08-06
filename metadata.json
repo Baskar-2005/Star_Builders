@@ -1,0 +1,6 @@
+{
+  "name": "Star Builders Puducherry",
+  "description": "Premium luxury residential and commercial construction in Puducherry featuring architectural design, 3D visualization, project cost estimation, and turnkey building solutions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

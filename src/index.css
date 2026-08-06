@@ -1,0 +1,276 @@
+@import "tailwindcss";
+
+/* GT Walsheim Webfont Declarations (Grilli Type Geometric Sans) */
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('https://cdn.jsdelivr.net/gh/mishal25/GT-Walsheim-Pro@main/GTWalsheimPro-Regular.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/mishal25/GT-Walsheim-Pro@main/GTWalsheimPro-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('https://cdn.jsdelivr.net/gh/mishal25/GT-Walsheim-Pro@main/GTWalsheimPro-Medium.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/mishal25/GT-Walsheim-Pro@main/GTWalsheimPro-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('https://cdn.jsdelivr.net/gh/mishal25/GT-Walsheim-Pro@main/GTWalsheimPro-Bold.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/mishal25/GT-Walsheim-Pro@main/GTWalsheimPro-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('https://cdn.jsdelivr.net/gh/mishal25/GT-Walsheim-Pro@main/GTWalsheimPro-UltraBold.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/mishal25/GT-Walsheim-Pro@main/GTWalsheimPro-UltraBold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Force GT Walsheim everywhere across the entire application */
+*, ::before, ::after {
+  font-family: 'GT Walsheim', 'Plus Jakarta Sans', 'Outfit', sans-serif !important;
+}
+
+@layer base {
+  html, body {
+    font-family: 'GT Walsheim', 'Plus Jakarta Sans', 'Outfit', sans-serif !important;
+    color: #1E293B;
+    background-color: #FAF8F5;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5, h6, p, span, a, button, input, select, textarea {
+    font-family: 'GT Walsheim', 'Plus Jakarta Sans', 'Outfit', sans-serif !important;
+  }
+}
+
+/* Shining & Shimmer Text Animations */
+@keyframes textShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shining-text {
+  background: linear-gradient(
+    110deg,
+    #0B182B 0%,
+    #0B182B 30%,
+    #D4AF37 50%,
+    #0B182B 70%,
+    #0B182B 100%
+  );
+  background-size: 200% auto;
+  color: #0B182B;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShine 4s ease-in-out infinite;
+  display: inline-block;
+}
+
+.gold-gradient-text, .gold-shining-text {
+  background: linear-gradient(
+    110deg,
+    #B8860B 0%,
+    #FFF8DC 25%,
+    #D4AF37 50%,
+    #FFF8DC 75%,
+    #AA771C 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShine 3.5s linear infinite;
+  display: inline-block;
+}
+
+.white-shining-text {
+  background: linear-gradient(
+    110deg,
+    #FFFFFF 0%,
+    #FFFFFF 30%,
+    #D4AF37 50%,
+    #FFFFFF 70%,
+    #FFFFFF 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShine 4s linear infinite;
+  display: inline-block;
+}
+
+.shimmer-badge {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.4) 20%,
+    rgba(255, 255, 255, 0.7) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Custom glassmorphism and luxury styling */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.04);
+}
+
+.glass-dark {
+  background: rgba(11, 24, 43, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.champagne-border {
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.blueprint-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(14, 116, 144, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14, 116, 144, 0.07) 1px, transparent 1px);
+}
+
+.blueprint-grid-dark {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(212, 175, 55, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212, 175, 55, 0.1) 1px, transparent 1px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.05); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(0.5deg); }
+}
+
+@keyframes floatReverse {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(12px) rotate(-0.5deg); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatSlow 7s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 8s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 12s linear infinite;
+}
+
+@keyframes scrollWheel {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.3; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-scroll-wheel {
+  animation: scrollWheel 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.floating-glass-card {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    0 25px 50px -12px rgba(11, 24, 43, 0.14),
+    0 0 0 1px rgba(212, 175, 55, 0.25) inset;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-glass-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 
+    0 30px 60px -15px rgba(11, 24, 43, 0.2),
+    0 0 0 1.5px rgba(212, 175, 55, 0.4) inset;
+}
+
