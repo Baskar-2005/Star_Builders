@@ -77,9 +77,12 @@ export default function ConstructionProcess() {
               <div key={ph.phase} className="glass-card rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
 
                 {/* Phase Header — clickable */}
-                <button
+                <div
+                  role="button"
+                  tabIndex={0}
                   onClick={() => setOpenPhase(isOpen ? null : pi)}
-                  className="w-full flex items-center justify-between px-6 py-4 group"
+                  onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') setOpenPhase(isOpen ? null : pi); }}
+                  className="w-full flex items-center justify-between px-6 py-4 group cursor-pointer"
                 >
                   <div className="flex items-center gap-4">
                     <span className={`px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest text-white bg-gradient-to-r ${ph.color} shadow-sm`}>
@@ -110,7 +113,7 @@ export default function ConstructionProcess() {
                     </div>
                     <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
                   </div>
-                </button>
+                </div>
 
                 {/* Phase Step List */}
                 <AnimatePresence initial={false}>
