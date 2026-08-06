@@ -13,11 +13,7 @@ export default function Navbar({ onOpenConsultation, activeSection }: NavbarProp
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 40) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -35,8 +31,8 @@ export default function Navbar({ onOpenConsultation, activeSection }: NavbarProp
   ];
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      isScrolled ? 'px-3 sm:px-6 pt-3 sm:pt-4' : 'px-4 sm:px-8 pt-4 sm:pt-6 bg-transparent'
+    <header className={`fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-500 ${
+      isScrolled ? 'px-3 sm:px-6 pt-3 sm:pt-4' : 'px-4 sm:px-8 pt-4 sm:pt-6'
     }`}>
       <div className="max-w-7xl mx-auto">
         <motion.div
@@ -51,14 +47,18 @@ export default function Navbar({ onOpenConsultation, activeSection }: NavbarProp
         >
           {/* Brand Logo */}
           <a href="#hero" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#0B182B] via-[#1E3A8A] to-[#0B182B] flex items-center justify-center text-[#D4AF37] shadow-lg shadow-[#0B182B]/20 group-hover:scale-105 transition-transform duration-300 ring-2 ring-[#D4AF37]/30">
-              <Sparkles className="w-5 h-5 animate-pulse text-[#D4AF37]" />
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#0B182B] via-[#1E3A8A] to-[#0B182B] flex items-center justify-center text-[#D4AF37] shadow-lg shadow-black/30 group-hover:scale-105 transition-transform duration-300 ring-2 ring-[#D4AF37]/40">
+              <Sparkles className="w-5 h-5 text-[#D4AF37]" />
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-base sm:text-lg tracking-wider text-[#0B182B] font-['GT_Walsheim'] leading-none">
+              <span className={`font-extrabold text-base sm:text-lg tracking-wider font-['GT_Walsheim'] leading-none transition-colors duration-300 ${
+                isScrolled ? 'text-[#0B182B]' : 'text-white drop-shadow'
+              }`}>
                 STAR <span className="gold-shining-text">BUILDERS</span>
               </span>
-              <span className="text-[10px] font-bold tracking-widest text-slate-600 uppercase leading-tight font-['GT_Walsheim']">
+              <span className={`text-[10px] font-bold tracking-widest uppercase leading-tight font-['GT_Walsheim'] transition-colors duration-300 ${
+                isScrolled ? 'text-slate-600' : 'text-white/70'
+              }`}>
                 PUDUCHERRY
               </span>
             </div>
@@ -72,8 +72,12 @@ export default function Navbar({ onOpenConsultation, activeSection }: NavbarProp
                 href={link.href}
                 className={`px-3.5 py-1.5 text-xs xl:text-sm font-semibold rounded-full transition-all duration-300 ${
                   activeSection === link.href.replace('#', '')
-                    ? 'text-[#0B182B] font-extrabold bg-[#D4AF37]/20 border border-[#D4AF37]/30 shadow-xs'
-                    : 'text-slate-800 hover:text-[#0B182B] hover:bg-white/50'
+                    ? isScrolled
+                      ? 'text-[#0B182B] font-extrabold bg-[#D4AF37]/20 border border-[#D4AF37]/30'
+                      : 'text-[#D4AF37] font-extrabold'
+                    : isScrolled
+                      ? 'text-slate-700 hover:text-[#0B182B] hover:bg-white/50'
+                      : 'text-white/85 hover:text-white'
                 }`}
               >
                 {link.label}
@@ -83,34 +87,46 @@ export default function Navbar({ onOpenConsultation, activeSection }: NavbarProp
 
           {/* Actions & CTA */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Direct WhatsApp Call */}
+            {/* WhatsApp */}
             <a
               href="https://wa.me/9106381375461?text=Hello%20Star%20Builders%2C%20I%20would%20like%20to%20enquire%20about%20a%20construction%20project%20in%20Puducherry."
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-50/90 text-emerald-700 border border-emerald-300/80 hover:bg-emerald-100 transition-all shadow-sm hover:scale-105"
+              className={`hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shadow-sm hover:scale-105 ${
+                isScrolled
+                  ? 'bg-emerald-50/90 text-emerald-700 border border-emerald-300/80 hover:bg-emerald-100'
+                  : 'bg-white/15 text-white border border-white/30 hover:bg-white/25 backdrop-blur-md'
+              }`}
               title="Chat on WhatsApp"
             >
-              <MessageCircle className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600/20" />
+              <MessageCircle className={`w-3.5 h-3.5 ${isScrolled ? 'text-emerald-600 fill-emerald-600/20' : 'text-emerald-400'}`} />
               <span>WhatsApp</span>
             </a>
 
-            {/* Free Consultation CTA */}
+            {/* Consultation CTA */}
             <motion.button
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               onClick={onOpenConsultation}
-              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-[#0B182B] to-[#1E3A8A] hover:from-[#1E3A8A] hover:to-[#0B182B] text-white text-xs sm:text-sm font-semibold shadow-lg shadow-[#0B182B]/20 hover:shadow-xl hover:shadow-[#0B182B]/30 transition-all cursor-pointer group border border-white/20"
+              className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg transition-all cursor-pointer group border ${
+                isScrolled
+                  ? 'bg-gradient-to-r from-[#0B182B] to-[#1E3A8A] hover:from-[#1E3A8A] hover:to-[#0B182B] text-white border-white/20 shadow-[#0B182B]/20 hover:shadow-xl hover:shadow-[#0B182B]/30'
+                  : 'bg-[#D4AF37] hover:bg-[#c9a430] text-[#0B182B] border-transparent shadow-black/20'
+              }`}
             >
               <span className="hidden xs:inline">Get Free Consultation</span>
               <span className="xs:hidden">Consultation</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#D4AF37]" />
+              <ArrowRight className={`w-3.5 h-3.5 group-hover:translate-x-1 transition-transform ${isScrolled ? 'text-[#D4AF37]' : 'text-[#0B182B]'}`} />
             </motion.button>
 
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-full bg-white/70 backdrop-blur-md text-slate-800 hover:bg-white transition-colors cursor-pointer shadow-sm border border-slate-200/80"
+              className={`lg:hidden p-2.5 rounded-full backdrop-blur-md transition-colors cursor-pointer shadow-sm border ${
+                isScrolled
+                  ? 'bg-white/70 text-slate-800 border-slate-200/80 hover:bg-white'
+                  : 'bg-white/15 text-white border-white/30 hover:bg-white/25'
+              }`}
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
