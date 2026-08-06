@@ -43,7 +43,7 @@ export default function Hero({ onExploreProjects, onOpenConsultation, onOpenEsti
           <img
             src={heroBgImage}
             alt="Star Builders Puducherry Head Office and Villa"
-            className="w-full h-full object-cover object-[62%_center] brightness-[0.88] contrast-[1.05]"
+            className="w-full h-full object-cover object-[78%_center] brightness-[0.88] contrast-[1.05]"
           />
 
           {/* Subtle left-edge fade to ensure text contrast */}
