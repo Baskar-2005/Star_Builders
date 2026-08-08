@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Building2, Users, Award, ShieldCheck, Calculator, Star, CheckCircle2, Phone, ChevronDown } from 'lucide-react';
-import heroBgImage from '../assets/hero-bg.png';
+import heroBgImage from '../assets/Star_Hero.png';
 
 interface HeroProps {
   onExploreProjects: () => void;
